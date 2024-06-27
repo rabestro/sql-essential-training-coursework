@@ -1,0 +1,108 @@
+erDiagram
+    ALBUM ||--|{ TRACK : "contains"
+    ARTIST ||--|| ALBUM : "creates"
+    CUSTOMER ||--|| INVOICE : "receives"
+    EMPLOYEE ||--o| CUSTOMER : "assists"
+    GENRE ||--|{ TRACK : "categorizes"
+    INVOICE ||--|{ INVOICELINE : "has"
+    MEDIATYPE ||--|{ TRACK : "has"
+    PLAYLIST ||--|{ PLAYLISTTRACK : "includes"
+    PLAYLISTTRACK ||--|| TRACK : "includes"
+    TRACK ||--|| INVOICELINE : "sells"
+
+    ALBUM {
+        INTEGER AlbumId
+        NVARCHAR(160) Title
+        INTEGER ArtistId
+    }
+
+    ARTIST {
+        INTEGER ArtistId
+        NVARCHAR(120) Name
+    }
+
+    CUSTOMER {
+        INTEGER CustomerId
+        NVARCHAR(40) FirstName
+        NVARCHAR(20) LastName
+        NVARCHAR(80) Company
+        NVARCHAR(70) Address
+        NVARCHAR(40) City
+        NVARCHAR(40) State
+        NVARCHAR(40) Country
+        NVARCHAR(10) PostalCode
+        NVARCHAR(24) Phone
+        NVARCHAR(24) Fax
+        NVARCHAR(60) Email
+        INTEGER SupportRepId
+    }
+
+    EMPLOYEE {
+        INTEGER EmployeeID
+        NVARCHAR(20) LastName
+        NVARCHAR(20) FirstName
+        NVARCHAR(30) Title
+        INTEGER ReportsTo
+        DATETIME BirthDate
+        DATETIME HireDate
+        NVARCHAR(70) Address
+        NVARCHAR(40) City
+        NVARCHAR(40) State
+        NVARCHAR(40) Country
+        NVARCHAR(10) PostalCode
+        NVARCHAR(24) Phone
+        NVARCHAR(24) Fax
+        NVARCHAR(60) Email
+    }
+
+    GENRE {
+        INTEGER GenreId
+        NVARCHAR(120) Name
+    }
+
+    INVOICE {
+        INTEGER InvoiceId
+        INTEGER CustomerId
+        DATETIME InvoiceDate
+        NVARCHAR(70) BillingAddress
+        NVARCHAR(40) BillingCity
+        NVARCHAR(40) BillingState
+        NVARCHAR(40) BillingCountry
+        NVARCHAR(10) BillingPostalCode
+        NUMERIC(10,2) Total
+    }
+
+    INVOICELINE {
+        INTEGER InvoiceLineId
+        INTEGER InvoiceId
+        INTEGER TrackId
+        NUMERIC(10,2) UnitPrice
+        INTEGER Quantity
+    }
+
+    MEDIATYPE {
+        INTEGER MediaTypeId
+        NVARCHAR(120) Name
+    }
+
+    PLAYLIST {
+        INTEGER PlaylistId
+        NVARCHAR(120) Name
+    }
+
+    PLAYLISTTRACK {
+        INTEGER PlaylistId
+        INTEGER TrackId
+    }
+
+    TRACK {
+        INTEGER TrackId
+        NVARCHAR(200) Name
+        INTEGER AlbumId
+        INTEGER MediaTypeId
+        INTEGER GenreId
+        NVARCHAR(220) Composer
+        INTEGER Milliseconds
+        INTEGER Bytes
+        NUMERIC(10,2) UnitPrice
+    }
